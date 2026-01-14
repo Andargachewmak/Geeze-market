@@ -15,9 +15,9 @@ const galleryItems: GalleryItem[] = [
   {
     id: 4,
     title: "Cultural Dresses",
-    image: "/asset/tradress.JPG",
+    image: "/asset/tradress.jpg",
     featured: true,
-    subImages: ["/asset/dresstra.JPG", "/asset/dresstraditio.JPG","/asset/tradi.JPG","/asset/cloth.JPG"],
+    subImages: ["/asset/dresstra.jpg", "/asset/dresstraditio.jpg","/asset/tradi.jpg","/asset/cloth.jpg"],
   },
   {
     id: 1,
@@ -29,13 +29,13 @@ const galleryItems: GalleryItem[] = [
     id: 2,
     title: "African Spices",
     image: "/asset/teff.jpg",
-    subImages: ["/asset/spices1.jpg", "/asset/spices2.jpg"],
+    subImages: ["/asset/teff.jpg", "/asset/teff.jpg"],
   },
   {
     id: 3,
     title: "Traditional Cookware",
-    image: "/asset/cookwares.JPG",
-    subImages: ["/asset/coffee.JPG", "/asset/cookware2.JPG"],
+    image: "/asset/cookwares.jpg",
+    subImages: ["/asset/coffee.jpg", "/asset/cookware2.jpg","/asset/teff.jpg"],
   },
 ];
 
