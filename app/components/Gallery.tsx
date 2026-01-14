@@ -1,4 +1,4 @@
-"use client"; // <-- Add this at the top
+"use client";
 
 import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
@@ -17,7 +17,12 @@ const galleryItems: GalleryItem[] = [
     title: "Cultural Dresses",
     image: "/asset/tradress.jpg",
     featured: true,
-    subImages: ["/asset/dresstra.jpg", "/asset/dresstraditio.jpg","/asset/tradi.jpg","/asset/cloth.jpg"],
+    subImages: [
+      "/asset/dresstra.jpg",
+      "/asset/dresstraditio.jpg",
+      "/asset/tradi.jpg",
+      "/asset/cloth.jpg",
+    ],
   },
   {
     id: 1,
@@ -35,7 +40,11 @@ const galleryItems: GalleryItem[] = [
     id: 3,
     title: "Traditional Cookware",
     image: "/asset/cookwares.jpg",
-    subImages: ["/asset/coffee.jpg", "/asset/cookware2.jpg","/asset/teff.jpg"],
+    subImages: [
+      "/asset/coffee.jpg",
+      "/asset/cookware2.jpg",
+      "/asset/teff.jpg",
+    ],
   },
 ];
 
@@ -46,7 +55,6 @@ const Gallery = () => {
   return (
     <section id="gallery" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4">
-
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
           <h5 className="text-[#af9e05] font-semibold uppercase tracking-widest">
@@ -62,24 +70,26 @@ const Gallery = () => {
           {galleryItems.map((item) => (
             <div
               key={item.id}
-              className={`group relative overflow-hidden shadow-md cursor-pointer ${
-                item.featured ? "sm:row-span-2" : "h-64 sm:h-auto"
-              }`}
               onClick={() => {
                 setSelectedItem(item);
                 setActiveSubIndex(0);
               }}
+              className={`group relative cursor-pointer overflow-hidden rounded-xl shadow-md ${
+                item.featured ? "sm:row-span-2" : "h-64 sm:h-auto"
+              }`}
             >
               <img
                 src={item.image}
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center">
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center">
                 <h4 className="text-white text-lg font-semibold mb-4">
                   {item.title}
                 </h4>
-                <div className="w-12 h-12 rounded-full bg-[#af9e05] text-white flex items-center justify-center transform scale-0 group-hover:scale-100 transition duration-300">
+                <div className="w-12 h-12 rounded-full bg-[#af9e05] text-white flex items-center justify-center scale-0 group-hover:scale-100 transition">
                   <FiPlus className="text-xl" />
                 </div>
               </div>
@@ -90,53 +100,54 @@ const Gallery = () => {
         {/* Modal */}
         {selectedItem && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-3"
             onClick={() => setSelectedItem(null)}
           >
             <div
-              className="bg-white rounded-2xl p-6 max-w-3xl w-full relative"
+              className="relative bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-4 sm:p-6"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
-                className="absolute top-4 right-4 text-gray-700 hover:text-gray-900"
+                className="absolute top-3 right-3 z-50 w-10 h-10 rounded-full bg-black/80 text-white flex items-center justify-center text-lg shadow-lg hover:bg-black transition"
                 onClick={() => setSelectedItem(null)}
+                aria-label="Close"
               >
                 ✕
               </button>
 
-              {/* Main Sub Image */}
+              {/* Main Image */}
               {selectedItem.subImages && (
                 <img
                   src={selectedItem.subImages[activeSubIndex]}
                   alt={selectedItem.title}
-                  className="w-full h-146 object-cover rounded-xl mb-4"
+                  className="w-full h-64 sm:h-96 object-cover rounded-xl"
                 />
               )}
 
               {/* Thumbnails */}
-              <div className="flex gap-2 justify-center">
+              <div className="flex flex-wrap gap-2 justify-center mt-4">
                 {selectedItem.subImages?.map((img, index) => (
-                  <div
+                  <button
                     key={index}
-                    className={`w-20 h-20 rounded-lg overflow-hidden border-2 cursor-pointer ${
+                    onClick={() => setActiveSubIndex(index)}
+                    className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition ${
                       activeSubIndex === index
                         ? "border-[#af9e05]"
-                        : "border-transparent"
+                        : "border-transparent opacity-70 hover:opacity-100"
                     }`}
-                    onClick={() => setActiveSubIndex(index)}
                   >
                     <img
                       src={img}
                       alt={`${selectedItem.title} ${index}`}
                       className="w-full h-full object-cover"
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
 
               {/* Title */}
-              <h3 className="text-2xl font-semibold text-gray-900 mt-4 text-center">
+              <h3 className="mt-4 text-xl sm:text-2xl font-semibold text-center text-gray-900">
                 {selectedItem.title}
               </h3>
             </div>
