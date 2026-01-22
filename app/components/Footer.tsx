@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTelegram } from "react-icons/fa";
 
 const Footer = () => (
@@ -13,7 +14,8 @@ const Footer = () => (
             className="w-36 mb-4"
           />
           <p className="text-black text-sm">
-Ge’Ez Market in San Leandro, CA offers authentic African goods, including teff, mixed spices, cookware, and traditional dresses. Visit us today!          </p>
+            Ge’Ez Market in San Leandro, CA offers authentic African goods, including teff, mixed spices, cookware, and traditional dresses. Visit us today!
+          </p>
         </div>
 
         {/* Explore Links */}
@@ -21,29 +23,29 @@ Ge’Ez Market in San Leandro, CA offers authentic African goods, including teff
           <h4 className="text-black font-semibold mb-4">Explore</h4>
           <ul className="space-y-2 text-black text-sm">
             <li>
-              <a href="#about" className="hover:text-white transition">
+              <Link href="/about" className="hover:text-white transition">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#gallery" className="hover:text-white transition">
+              <Link href="/gallery" className="hover:text-white transition">
                 Gallery
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#products" className="hover:text-white transition">
+              <Link href="/products" className="hover:text-white transition">
                 Products
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#contact" className="hover:text-white transition">
+              <Link href="/contact" className="hover:text-white transition">
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
-        {/* Empty Column or Recent Posts */}
+        {/* Empty Column */}
         <div></div>
 
         {/* Contact Info */}
@@ -56,7 +58,7 @@ Ge’Ez Market in San Leandro, CA offers authentic African goods, including teff
             <li>
               <strong>Email:</strong>{" "}
               <a
-                href="mailto:info@freshcorner.com"
+                href="mailto:Geezmarket1@gmail.com"
                 className="hover:text-white transition"
               >
                 Geezmarket1@gmail.com
@@ -64,7 +66,7 @@ Ge’Ez Market in San Leandro, CA offers authentic African goods, including teff
             </li>
             <li>
               <strong>Phone:</strong>{" "}
-              <a href="#" className="hover:text-white transition">
+              <a href="tel:+14084496553" className="hover:text-white transition">
                 +1 408-449-6553
               </a>
             </li>
@@ -75,6 +77,7 @@ Ge’Ez Market in San Leandro, CA offers authentic African goods, including teff
             <a
               href="https://web.facebook.com/profile.php?id=100066433460947"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-black hover:text-white transition"
             >
               <FaFacebookF />
@@ -82,6 +85,7 @@ Ge’Ez Market in San Leandro, CA offers authentic African goods, including teff
             <a
               href="https://www.instagram.com/geez_market?igsh=ZW4zbW9oMnYybGx5"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-black hover:text-white transition"
             >
               <FaInstagram />
@@ -89,6 +93,7 @@ Ge’Ez Market in San Leandro, CA offers authentic African goods, including teff
             <a
               href="https://t.me/Fresh_Corner_Ethiopia"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-black hover:text-white transition"
             >
               <FaTelegram />
@@ -103,9 +108,10 @@ Ge’Ez Market in San Leandro, CA offers authentic African goods, including teff
         <a
           href="https://netibconsult.com/"
           target="_blank"
+          rel="noopener noreferrer"
           className="hover:text-white transition"
         >
-          Andargachew 
+          Andargachew
         </a>
         .
       </div>

@@ -1,18 +1,29 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import { usePathname } from "next/navigation";
+import { FiMenu, FiX, FiHome, FiBox, FiImage, FiPhone } from "react-icons/fi";
+
+// Nav items with icons
+const navItems = [
+  { label: "About", href: "/about", icon: <FiHome /> },
+  { label: "Products", href: "/products", icon: <FiBox /> },
+  { label: "Gallery", href: "/gallery", icon: <FiImage /> },
+  { label: "Contact", href: "/contact", icon: <FiPhone /> },
+];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
 
         {/* Logo */}
-        <div className="flex items-center">
+        <Link href="/" className="flex items-center">
           <Image
             src="/asset/Asset 3.svg"
             alt="Ge’ez Market Logo"
@@ -20,25 +31,36 @@ const Navbar = () => {
             height={50}
             priority
           />
-        </div>
+        </Link>
 
-        {/* Desktop Nav */}
+        {/* Desktop Nav - ORIGINAL STYLE */}
         <nav className="hidden md:flex gap-8 text-sm font-medium">
-          {["About", "Products", "Gallery", "Contact"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="relative group transition"
-            >
-              <span className="group-hover:text-[#af9e05]">{item}</span>
-              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#af9e05] transition-all group-hover:w-full" />
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`relative group transition ${
+                  isActive
+                    ? "font-bold text-[#af9e05]"
+                    : "text-gray-700 hover:text-[#af9e05]"
+                }`}
+              >
+                {item.label}
+                <span
+                  className={`absolute left-0 -bottom-1 h-[2px] bg-[#af9e05] transition-all ${
+                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-2xl"
+          className="md:hidden text-2xl text-gray-800 hover:text-[#af9e05] transition-transform duration-300"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -46,25 +68,33 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+      {/* Mobile Menu - Floating Drawer hugging the right edge tightly */}
+      <nav
+        className={`md:hidden fixed top-28 right-0 bg-white/95 backdrop-blur-xl  shadow-lg z-50 transform transition-transform duration-500 flex flex-col p-2 gap-2 ${
+          open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}
+        style={{ width: "150px" }} // narrower width to hug right edge
       >
-        <nav className="bg-white/90 backdrop-blur px-6 py-6 space-y-4 text-sm font-medium border-t">
-          {["About", "Products", "Gallery", "Contact"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+        {navItems.map((item, index) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.label}
+              href={item.href}
               onClick={() => setOpen(false)}
-              className="block py-2 border-b last:border-none hover:text-[#af9e05] transition"
+              className={`flex items-center gap-3 px-2 py-2 rounded-md transition-all duration-300 ${
+                isActive
+                  ? "text-[#af9e05] scale-105 bg-yellow-50"
+                  : "text-gray-700 hover:text-[#af9e05] hover:bg-yellow-50 hover:scale-105"
+              }`}
+              style={{ transitionDelay: `${index * 50}ms` }}
             >
-              {item}
-            </a>
-          ))}
-        </nav>
-      </div>
+              <span className="text-lg flex-shrink-0">{item.icon}</span>
+              <span className="truncate">{item.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
     </header>
   );
 };

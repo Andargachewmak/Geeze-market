@@ -1,5 +1,6 @@
 import React from "react";
-import { FiShoppingBag, FiPackage,  FiUsers, FiTag } from "react-icons/fi";
+import Link from "next/link"; // <-- import Link
+import { FiShoppingBag, FiPackage, FiUsers, FiTag } from "react-icons/fi";
 
 const About: React.FC = () => {
   return (
@@ -28,7 +29,7 @@ const About: React.FC = () => {
               Your trusted African grocery store in San Leandro, California. Premium Teff, mixed spices, traditional cookware, and beautiful cultural dresses.
             </p>
 
-            {/* Features with Appropriate Icons */}
+            {/* Features */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="flex items-start gap-4">
                 <div className="text-2xl text-[#af9e05] mt-1">
@@ -48,7 +49,6 @@ const About: React.FC = () => {
               </div>
               <div className="flex items-start gap-4">
                 <div className="flex flex-col gap-1 text-[#af9e05] mt-1 text-2xl">
-                 
                   <FiTag />
                 </div>
                 <p className="text-gray-700 font-medium">
@@ -65,12 +65,13 @@ const About: React.FC = () => {
               </div>
             </div>
 
-            <a
-              href="#products"
-              className="inline-block mt-4 bg-gradient-to-r from-[#af9e05] to-[#d0b82b] text-white px-8 py-3 rounded-xl font-semibold   transition-all duration-300"
+            {/* Link to About Page */}
+            <Link
+              href="/about" // <-- navigate to About page
+              className="inline-block mt-4 bg-gradient-to-r from-[#af9e05] to-[#d0b82b] text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300"
             >
               More About
-            </a>
+            </Link>
           </div>
         </div>
       </div>
